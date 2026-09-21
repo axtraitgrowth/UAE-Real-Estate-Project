@@ -1,0 +1,181 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ----------------------------------------------------
+// Organization / Multi-Tenant Boundary
+// ----------------------------------------------------
+model Organization {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  logoUrl     String?
+  currency    String   @default("AED")
+  timezone    String   @default("Asia/Dubai")
+  taxNumber   String?  // UAE TRN (Tax Registration Number)
+  phone       String?
+  address     String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  memberships OrganizationMembership[]
+  teams       Team[]
+  roles       Role[]
+  auditLogs   AuditLog[]
+
+  @@index([slug])
+  @@index([isActive])
+}
+
+// ----------------------------------------------------
+// User Identity
+// ----------------------------------------------------
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String
+  firstName    String
+  lastName     String
+  phone        String?
+  avatarUrl    String?
+  isActive     Boolean   @default(true)
+  isSuperAdmin Boolean   @default(false)
+  lastLoginAt  DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  memberships OrganizationMembership[]
+  ledTeams    Team[]                   @relation("TeamLeader")
+  auditLogs   AuditLog[]
+
+  @@index([email])
+  @@index([isActive])
+}
+
+// ----------------------------------------------------
+// Organization Membership (User <-> Org Bridge with Role)
+// ----------------------------------------------------
+model OrganizationMembership {
+  id             String   @id @default(cuid())
+  organizationId String
+  userId         String
+  roleId         String
+  isDefault      Boolean  @default(false)
+  joinedAt       DateTime @default(now())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role           Role         @relation(fields: [roleId], references: [id], onDelete: Restrict)
+
+  @@unique([organizationId, userId])
+  @@index([organizationId])
+  @@index([userId])
+  @@index([roleId])
+}
+
+// ----------------------------------------------------
+// Role Definitions (System & Org-Specific)
+// ----------------------------------------------------
+model Role {
+  id             String   @id @default(cuid())
+  organizationId String?  // Null for global system default roles
+  name           String
+  slug           String
+  description    String?
+  isSystem       Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  organization   Organization?            @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  memberships    OrganizationMembership[]
+  permissions    RolePermission[]
+
+  @@index([organizationId])
+  @@index([slug])
+}
+
+// ----------------------------------------------------
+// Granular Permissions Catalog
+// ----------------------------------------------------
+model Permission {
+  id          String   @id @default(cuid())
+  code        String   @unique
+  module      String
+  name        String
+  description String
+  createdAt   DateTime @default(now())
+
+  roles       RolePermission[]
+
+  @@index([module])
+  @@index([code])
+}
+
+// ----------------------------------------------------
+// Role <-> Permission Join Table
+// ----------------------------------------------------
+model RolePermission {
+  id           String   @id @default(cuid())
+  roleId       String
+  permissionId String
+  createdAt    DateTime @default(now())
+
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@unique([roleId, permissionId])
+  @@index([roleId])
+  @@index([permissionId])
+}
+
+// ----------------------------------------------------
+// Team Foundation (Phase 2 bridge)
+// ----------------------------------------------------
+model Team {
+  id             String   @id @default(cuid())
+  organizationId String
+  name           String
+  description    String?
+  leaderId       String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  leader         User?        @relation("TeamLeader", fields: [leaderId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId])
+  @@index([leaderId])
+}
+
+// ----------------------------------------------------
+// Audit Log Foundation (Phase 11 bridge & auditability)
+// ----------------------------------------------------
+model AuditLog {
+  id             String   @id @default(cuid())
+  organizationId String
+  userId         String?
+  action         String
+  entityType     String
+  entityId       String?
+  metadata       String?  // JSON string
+  ipAddress      String?
+  userAgent      String?
+  createdAt      DateTime @default(now())
+
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user           User?        @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId])
+  @@index([userId])
+  @@index([action])
+  @@index([entityType])
+  @@index([createdAt])
+}
