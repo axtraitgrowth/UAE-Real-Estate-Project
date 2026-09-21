@@ -56,7 +56,7 @@ export default function ProfilePage() {
       </div>
 
       {/* Settings Subnavigation */}
-      <div className="flex border-b border-slate-800 space-x-6">
+      <div className="flex border-b border-[#1E2638] space-x-6">
         <Link
           href="/settings"
           className="flex items-center gap-2 border-b-2 border-transparent py-2.5 text-xs font-medium text-slate-400 hover:text-slate-200"
@@ -73,7 +73,7 @@ export default function ProfilePage() {
         </Link>
         <Link
           href="/settings/profile"
-          className="flex items-center gap-2 border-b-2 border-amber-500 py-2.5 text-xs font-semibold text-amber-400"
+          className="flex items-center gap-2 border-b-2 border-[#B39266] py-2.5 text-xs font-semibold text-[#C5A880]"
         >
           <User className="w-3.5 h-3.5" />
           <span>My User Profile</span>
@@ -160,21 +160,21 @@ export default function ProfilePage() {
               {user.memberships.map((m) => (
                 <div
                   key={m.id}
-                  className="rounded-lg border border-slate-800 bg-[#0A0D15] p-3 space-y-1.5"
+                  className="rounded-md border border-[#1E2638] bg-[#0B0E14] p-3 space-y-1.5"
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-semibold text-xs text-white truncate">
                       {m.organizationName}
                     </span>
                     {m.organizationId === user.currentOrganization.id ? (
-                      <Badge variant="gold" size="sm">Current</Badge>
+                      <Badge variant="brass" size="sm">Current</Badge>
                     ) : (
                       <Badge variant="neutral" size="sm">Member</Badge>
                     )}
                   </div>
                   <div className="flex items-center justify-between text-[11px] text-slate-400">
                     <span>Assigned Role:</span>
-                    <span className="font-medium text-amber-400">{m.roleName}</span>
+                    <span className="font-medium text-[#C5A880]">{m.roleName}</span>
                   </div>
                 </div>
               ))}

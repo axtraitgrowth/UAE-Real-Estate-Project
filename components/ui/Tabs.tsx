@@ -17,7 +17,7 @@ export interface TabsProps {
 
 export function Tabs({ tabs, activeTab, onChange, className }: TabsProps) {
   return (
-    <div className={cn("border-b border-slate-800", className)}>
+    <div className={cn("border-b border-[#1E2638]", className)}>
       <nav className="-mb-px flex space-x-6 overflow-x-auto" aria-label="Tabs">
         {tabs.map((tab) => {
           const isActive = tab.id === activeTab;
@@ -26,17 +26,17 @@ export function Tabs({ tabs, activeTab, onChange, className }: TabsProps) {
               key={tab.id}
               onClick={() => onChange(tab.id)}
               className={cn(
-                "group inline-flex items-center gap-2 border-b-2 py-3 px-1 text-sm font-medium transition-all whitespace-nowrap",
+                "group inline-flex items-center gap-2 border-b-2 py-2.5 px-1 text-xs sm:text-sm font-medium transition-colors whitespace-nowrap",
                 isActive
-                  ? "border-amber-500 text-amber-400 font-semibold"
-                  : "border-transparent text-slate-400 hover:border-slate-700 hover:text-slate-200"
+                  ? "border-[#B39266] text-[#C5A880] font-semibold"
+                  : "border-transparent text-slate-400 hover:border-[#28334A] hover:text-slate-200"
               )}
             >
               {tab.icon && (
                 <span
                   className={cn(
                     "w-4 h-4 transition-colors",
-                    isActive ? "text-amber-400" : "text-slate-500 group-hover:text-slate-300"
+                    isActive ? "text-[#B39266]" : "text-slate-500 group-hover:text-slate-300"
                   )}
                 >
                   {tab.icon}
@@ -46,10 +46,10 @@ export function Tabs({ tabs, activeTab, onChange, className }: TabsProps) {
               {typeof tab.count === "number" && (
                 <span
                   className={cn(
-                    "ml-1 rounded-full px-2 py-0.5 text-xs font-mono",
+                    "ml-1 rounded px-1.5 py-0.5 text-[10px] font-mono",
                     isActive
-                      ? "bg-amber-500/20 text-amber-300"
-                      : "bg-slate-800 text-slate-400"
+                      ? "bg-[#B39266]/20 text-[#C5A880]"
+                      : "bg-[#151B28] text-slate-400 border border-[#232C42]"
                   )}
                 >
                   {tab.count}

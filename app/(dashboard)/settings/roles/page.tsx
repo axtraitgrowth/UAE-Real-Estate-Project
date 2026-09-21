@@ -1,12 +1,11 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/Table";
-import { LoadingSpinner } from "@/components/ui/LoadingState";
 import { Building2, Shield, User, Check, Minus } from "lucide-react";
 import { SYSTEM_ROLES, SYSTEM_PERMISSIONS } from "@/config/permissions";
 import { SystemPermissionCode } from "@/types/rbac";
@@ -34,15 +33,15 @@ export default function RolesSettingsPage() {
           ]}
         />
         <h1 className="text-xl font-bold tracking-tight text-white mt-1">
-          Role-Based Access Control (RBAC) Foundation
+          Role-Based Access Control (RBAC) Architecture
         </h1>
         <p className="text-xs text-slate-400">
-          Inspect role hierarchies, granted authority levels, and modular system permissions.
+          Inspect role hierarchies, security clearance levels, and granular system permission scopes.
         </p>
       </div>
 
       {/* Settings Subnavigation */}
-      <div className="flex border-b border-slate-800 space-x-6">
+      <div className="flex border-b border-[#1E2638] space-x-6">
         <Link
           href="/settings"
           className="flex items-center gap-2 border-b-2 border-transparent py-2.5 text-xs font-medium text-slate-400 hover:text-slate-200"
@@ -52,7 +51,7 @@ export default function RolesSettingsPage() {
         </Link>
         <Link
           href="/settings/roles"
-          className="flex items-center gap-2 border-b-2 border-amber-500 py-2.5 text-xs font-semibold text-amber-400"
+          className="flex items-center gap-2 border-b-2 border-[#B39266] py-2.5 text-xs font-semibold text-[#C5A880]"
         >
           <Shield className="w-3.5 h-3.5" />
           <span>Roles & Permissions</span>
@@ -74,10 +73,10 @@ export default function RolesSettingsPage() {
             <button
               key={role.slug}
               onClick={() => setSelectedRole(role.slug)}
-              className={`flex flex-col items-start rounded-lg border p-3 text-left transition-all ${
+              className={`flex flex-col items-start rounded-md border p-3 text-left transition-colors ${
                 isSelected
-                  ? "border-amber-500 bg-amber-500/10 text-white shadow-sm"
-                  : "border-slate-800 bg-[#0F1420] text-slate-400 hover:border-slate-700 hover:text-slate-200"
+                  ? "border-[#B39266] bg-[#B39266]/15 text-white shadow-sm"
+                  : "border-[#1E2638] bg-[#10141E] text-slate-400 hover:border-[#28334A] hover:text-slate-200"
               }`}
             >
               <div className="flex w-full items-center justify-between">
@@ -86,7 +85,7 @@ export default function RolesSettingsPage() {
                   <span className="text-[9px] font-mono uppercase text-slate-500">SYS</span>
                 )}
               </div>
-              <span className="text-[10px] text-amber-400/80 font-mono mt-1">
+              <span className="text-[10px] text-[#C5A880] font-mono mt-1">
                 {role.permissions.length} perms
               </span>
             </button>
@@ -101,14 +100,14 @@ export default function RolesSettingsPage() {
             <div>
               <div className="flex items-center gap-2">
                 <CardTitle>{activeRoleDefinition.name}</CardTitle>
-                <Badge variant="gold">System Role</Badge>
+                <Badge variant="brass">System Role</Badge>
               </div>
               <CardDescription className="mt-1">
                 {activeRoleDefinition.description}
               </CardDescription>
             </div>
             <div className="text-right">
-              <span className="text-xs font-semibold text-amber-400">
+              <span className="text-xs font-semibold text-[#C5A880] tabular-nums">
                 {activeRoleDefinition.permissions.length} of {SYSTEM_PERMISSIONS.length} Permissions
               </span>
             </div>
@@ -118,15 +117,15 @@ export default function RolesSettingsPage() {
         <CardContent>
           {/* Module Filter Pills */}
           <div className="mb-4 flex flex-wrap items-center gap-1.5">
-            <span className="text-[11px] font-semibold text-slate-400 mr-2 uppercase tracking-wider">
+            <span className="text-[10px] font-semibold text-slate-400 mr-2 uppercase tracking-wider font-mono">
               Filter Module:
             </span>
             <button
               onClick={() => setFilterModule("all")}
-              className={`rounded-full px-2.5 py-0.5 text-xs font-medium transition-colors ${
+              className={`rounded px-2.5 py-1 text-xs font-medium transition-colors ${
                 filterModule === "all"
-                  ? "bg-amber-500 text-slate-950 font-semibold"
-                  : "bg-slate-800 text-slate-400 hover:bg-slate-700"
+                  ? "bg-[#B39266] text-[#0B0E14] font-semibold"
+                  : "bg-[#151B28] text-slate-400 border border-[#232C42] hover:bg-[#1B2233] hover:text-slate-200"
               }`}
             >
               All ({SYSTEM_PERMISSIONS.length})
@@ -137,10 +136,10 @@ export default function RolesSettingsPage() {
                 <button
                   key={mod}
                   onClick={() => setFilterModule(mod)}
-                  className={`rounded-full px-2.5 py-0.5 text-xs font-medium uppercase font-mono transition-colors ${
+                  className={`rounded px-2.5 py-1 text-xs font-medium uppercase font-mono transition-colors ${
                     filterModule === mod
-                      ? "bg-amber-500 text-slate-950 font-semibold"
-                      : "bg-slate-800 text-slate-400 hover:bg-slate-700"
+                      ? "bg-[#B39266] text-[#0B0E14] font-semibold"
+                      : "bg-[#151B28] text-slate-400 border border-[#232C42] hover:bg-[#1B2233] hover:text-slate-200"
                   }`}
                 >
                   {mod} ({count})
@@ -168,20 +167,20 @@ export default function RolesSettingsPage() {
                   <TableRow key={perm.code}>
                     <TableCell className="text-center">
                       {isGranted ? (
-                        <div className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                        <div className="inline-flex h-5 w-5 items-center justify-center rounded bg-emerald-950/40 text-emerald-300 border border-emerald-700/40">
                           <Check className="w-3 h-3" />
                         </div>
                       ) : (
-                        <div className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-slate-800 text-slate-600">
+                        <div className="inline-flex h-5 w-5 items-center justify-center rounded bg-[#151B28] text-slate-600 border border-[#232C42]">
                           <Minus className="w-3 h-3" />
                         </div>
                       )}
                     </TableCell>
-                    <TableCell className="font-mono text-xs text-amber-400/90 font-medium">
+                    <TableCell className="font-mono text-xs text-[#C5A880] font-medium">
                       {perm.code}
                     </TableCell>
                     <TableCell>
-                      <span className="rounded bg-slate-800 px-2 py-0.5 text-[10px] font-mono uppercase text-slate-400">
+                      <span className="rounded bg-[#151B28] border border-[#232C42] px-2 py-0.5 text-[10px] font-mono uppercase text-slate-300">
                         {perm.module}
                       </span>
                     </TableCell>

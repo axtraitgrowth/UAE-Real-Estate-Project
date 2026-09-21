@@ -4,35 +4,35 @@
 
 @layer base {
   :root {
-    --background: 222 47% 11%;
+    --background: 220 28% 6%; /* #0B0E14 */
     --foreground: 210 40% 98%;
 
-    --card: 222 47% 13%;
+    --card: 222 30% 9%; /* #10141E */
     --card-foreground: 210 40% 98%;
 
-    --popover: 222 47% 12%;
+    --popover: 222 30% 9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 38 42% 53%; /* Desert Gold */
-    --primary-foreground: 222 47% 11%;
+    --primary: 35 35% 55%; /* Warm Desert Brass #B39266 */
+    --primary-foreground: 220 28% 6%;
 
-    --secondary: 217 33% 18%;
+    --secondary: 221 28% 13%; /* #151B28 */
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217 33% 17%;
+    --muted: 221 28% 13%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 38 42% 53%;
-    --accent-foreground: 222 47% 11%;
+    --accent: 35 35% 55%;
+    --accent-foreground: 220 28% 6%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217 33% 20%;
-    --input: 217 33% 20%;
-    --ring: 38 42% 53%;
+    --border: 220 30% 17%; /* #1E2638 */
+    --input: 220 30% 17%;
+    --ring: 35 35% 55%;
 
-    --radius: 0.5rem;
+    --radius: 0.375rem;
   }
 
   * {
@@ -41,7 +41,7 @@
   }
 
   body {
-    @apply bg-[#0A0D15] text-[#F1F5F9] antialiased;
+    @apply bg-[#0B0E14] text-[#F1F5F9] antialiased selection:bg-[#B39266]/25 selection:text-white;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     min-height: 100vh;
     min-height: 100dvh;
@@ -54,21 +54,21 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Custom scrollbar for modern B2B tables and sidebars */
+/* Custom discreet scrollbar for commercial B2B tables and sidebars */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0A0D15;
+  background: #0B0E14;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1E293B;
-  border-radius: 4px;
+  background: #1E2638;
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #28334A;
 }

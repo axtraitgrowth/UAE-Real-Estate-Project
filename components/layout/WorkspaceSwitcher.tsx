@@ -31,14 +31,14 @@ export function WorkspaceSwitcher() {
         <button
           type="button"
           disabled={isSwitching}
-          className="flex items-center gap-2.5 rounded-lg border border-slate-800 bg-[#0F1420] px-3 py-1.5 text-left text-xs transition-all hover:border-slate-700 focus:outline-none focus:ring-1 focus:ring-amber-500"
+          className="flex items-center gap-2.5 rounded-md border border-[#1E2638] bg-[#10141E] px-3 py-1.5 text-left text-xs transition-colors hover:border-[#28334A] focus:outline-none focus:ring-1 focus:ring-[#B39266]/40"
         >
-          <div className="flex h-6 w-6 items-center justify-center rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 shrink-0">
+          <div className="flex h-6 w-6 items-center justify-center rounded bg-[#151B28] text-[#C5A880] border border-[#232C42] shrink-0">
             <Building2 className="w-3.5 h-3.5" />
           </div>
           <div className="flex flex-col min-w-0 max-w-[140px] sm:max-w-[180px]">
             <span className="truncate font-semibold text-slate-100">{currentOrg.name}</span>
-            <span className="truncate text-[10px] text-amber-400/90 flex items-center gap-1">
+            <span className="truncate text-[10px] text-[#C5A880] flex items-center gap-1">
               <ShieldCheck className="w-2.5 h-2.5" />
               {user.currentRole.name}
             </span>
@@ -58,7 +58,7 @@ export function WorkspaceSwitcher() {
               <button
                 key={membership.id}
                 onClick={() => handleSelect(membership.organizationId)}
-                className="flex w-full items-center justify-between gap-2 rounded-md px-2.5 py-2 text-xs transition-colors hover:bg-slate-800 text-left"
+                className="flex w-full items-center justify-between gap-2 rounded-md px-2.5 py-2 text-xs transition-colors hover:bg-[#151B28] text-left"
               >
                 <div className="flex items-center gap-2 min-w-0">
                   <Building2 className="w-3.5 h-3.5 text-slate-400 shrink-0" />
@@ -67,7 +67,7 @@ export function WorkspaceSwitcher() {
                     <p className="text-[10px] text-slate-500">{membership.roleName}</p>
                   </div>
                 </div>
-                {isSelected && <Check className="w-4 h-4 text-amber-400 shrink-0" />}
+                {isSelected && <Check className="w-4 h-4 text-[#C5A880] shrink-0" />}
               </button>
             );
           })}

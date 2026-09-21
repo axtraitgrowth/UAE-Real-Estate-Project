@@ -25,10 +25,10 @@ export default function SettingsPage() {
       </div>
 
       {/* Settings Subnavigation */}
-      <div className="flex border-b border-slate-800 space-x-6">
+      <div className="flex border-b border-[#1E2638] space-x-6">
         <Link
           href="/settings"
-          className="flex items-center gap-2 border-b-2 border-amber-500 py-2.5 text-xs font-semibold text-amber-400"
+          className="flex items-center gap-2 border-b-2 border-[#B39266] py-2.5 text-xs font-semibold text-[#C5A880]"
         >
           <Building2 className="w-3.5 h-3.5" />
           <span>Organization Profile</span>

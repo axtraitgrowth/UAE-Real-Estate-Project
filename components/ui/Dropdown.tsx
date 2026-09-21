@@ -55,7 +55,7 @@ export function Dropdown({ trigger, items, children, align = "left", className }
       {isOpen && (
         <div
           className={cn(
-            "absolute z-40 mt-1.5 min-w-[12rem] rounded-md border border-slate-800 bg-[#0F1420] p-1 shadow-xl focus:outline-none",
+            "absolute z-40 mt-1.5 min-w-[12rem] rounded-lg border border-[#1E2638] bg-[#10141E] p-1 shadow-2xl focus:outline-none",
             align === "right" ? "right-0" : "left-0",
             className
           )}
@@ -73,11 +73,11 @@ export function Dropdown({ trigger, items, children, align = "left", className }
                   className={cn(
                     "flex w-full items-center gap-2 rounded px-3 py-2 text-xs font-medium transition-colors text-left",
                     item.destructive
-                      ? "text-red-400 hover:bg-red-500/10"
+                      ? "text-rose-400 hover:bg-rose-950/30"
                       : item.active
-                      ? "bg-amber-500/10 text-amber-400"
-                      : "text-slate-300 hover:bg-slate-800 hover:text-white",
-                    item.disabled ? "opacity-50 cursor-not-allowed" : ""
+                      ? "bg-[#B39266]/15 text-[#C5A880]"
+                      : "text-slate-300 hover:bg-[#151B28] hover:text-white",
+                    item.disabled ? "opacity-40 cursor-not-allowed" : ""
                   )}
                 >
                   {item.icon && <span className="w-4 h-4">{item.icon}</span>}

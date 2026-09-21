@@ -19,12 +19,12 @@ export function ErrorState({
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center rounded-lg border border-red-500/20 bg-red-950/10 p-8 text-center",
+        "flex flex-col items-center justify-center rounded-lg border border-rose-900/40 bg-rose-950/20 p-8 text-center",
         className
       )}
     >
-      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-red-500/10 text-red-400 mb-4 border border-red-500/30">
-        <AlertOctagon className="w-6 h-6" />
+      <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-rose-950/50 text-rose-400 mb-3 border border-rose-800/40">
+        <AlertOctagon className="w-5 h-5" />
       </div>
       <h3 className="text-sm font-semibold text-slate-200 tracking-tight">{title}</h3>
       <p className="mt-1 max-w-sm text-xs text-red-300/80 leading-relaxed">{message}</p>

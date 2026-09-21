@@ -5,10 +5,10 @@ import { FileQuestion, ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#07090F] p-4 text-center">
-      <div className="w-full max-w-md rounded-xl border border-slate-800 bg-[#0F1420] p-8 shadow-2xl">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-slate-800 text-amber-400 border border-slate-700 mb-4">
-          <FileQuestion className="w-6 h-6" />
+    <div className="flex min-h-screen items-center justify-center bg-[#0B0E14] p-4 text-center">
+      <div className="w-full max-w-md rounded-lg border border-[#1E2638] bg-[#10141E] p-8 shadow-2xl">
+        <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-lg bg-[#151B28] text-[#C5A880] border border-[#232C42] mb-4">
+          <FileQuestion className="w-5 h-5" />
         </div>
         <h2 className="text-xl font-bold text-white tracking-tight">404 - Page Not Found</h2>
         <p className="mt-2 text-xs text-slate-400 leading-relaxed">

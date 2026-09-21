@@ -5,7 +5,7 @@ import { Loader2 } from "lucide-react";
 export function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn("animate-pulse rounded bg-slate-800/60", className)}
+      className={cn("animate-pulse rounded bg-[#151B28]", className)}
       {...props}
     />
   );
@@ -20,12 +20,12 @@ export function LoadingSpinner({
 }) {
   const sizeMap = {
     sm: "w-4 h-4",
-    md: "w-6 h-6",
-    lg: "w-8 h-8",
+    md: "w-5 h-5",
+    lg: "w-7 h-7",
   };
 
   return (
-    <Loader2 className={cn("animate-spin text-amber-500", sizeMap[size], className)} />
+    <Loader2 className={cn("animate-spin text-[#B39266]", sizeMap[size], className)} />
   );
 }
 

@@ -16,6 +16,13 @@ export function formatAED(amount: number, options?: { showCode?: boolean; decima
 }
 
 /**
+ * General currency formatter alias
+ */
+export function formatCurrency(amount: number, currency: string = "AED"): string {
+  return formatAED(amount);
+}
+
+/**
  * Format area in Square Feet (sq.ft) - standard across Dubai real estate
  */
 export function formatSqFt(area: number): string {

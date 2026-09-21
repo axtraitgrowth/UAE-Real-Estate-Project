@@ -73,8 +73,8 @@ export function OrgSettingsForm() {
       <CardHeader>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/10 text-amber-400 border border-amber-500/20">
-              <Building2 className="w-5 h-5" />
+            <div className="flex h-9 w-9 items-center justify-center rounded-md bg-[#151B28] text-[#C5A880] border border-[#232C42]">
+              <Building2 className="w-4 h-4" />
             </div>
             <div>
               <CardTitle>Organization Workspace Profile</CardTitle>
@@ -83,7 +83,7 @@ export function OrgSettingsForm() {
               </CardDescription>
             </div>
           </div>
-          <Badge variant={canManage ? "gold" : "neutral"}>
+          <Badge variant={canManage ? "brass" : "neutral"}>
             {canManage ? "Editor" : "Read-Only"}
           </Badge>
         </div>

@@ -17,10 +17,10 @@ export default function GlobalError({
   }, [error]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#07090F] p-4 text-center">
-      <div className="w-full max-w-md rounded-xl border border-red-500/20 bg-[#0F1420] p-8 shadow-2xl">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-500/10 text-red-400 border border-red-500/30 mb-4">
-          <AlertOctagon className="w-6 h-6" />
+    <div className="flex min-h-screen items-center justify-center bg-[#0B0E14] p-4 text-center">
+      <div className="w-full max-w-md rounded-lg border border-rose-900/40 bg-[#10141E] p-8 shadow-2xl">
+        <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-lg bg-rose-950/40 text-rose-400 border border-rose-800/40 mb-4">
+          <AlertOctagon className="w-5 h-5" />
         </div>
         <h2 className="text-lg font-bold text-white tracking-tight">System Encountered an Error</h2>
         <p className="mt-2 text-xs text-slate-400 leading-relaxed">
@@ -28,7 +28,7 @@ export default function GlobalError({
         </p>
 
         {error.digest && (
-          <p className="mt-3 rounded bg-slate-900/80 px-2.5 py-1 text-[10px] font-mono text-slate-500">
+          <p className="mt-3 rounded bg-[#0B0E14] px-2.5 py-1 text-[10px] font-mono text-slate-500 border border-[#1E2638]">
             Error ID: {error.digest}
           </p>
         )}

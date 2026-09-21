@@ -29,6 +29,14 @@ export const MAIN_NAVIGATION: NavigationSection[] = [
     title: "Sales Supervision",
     items: [
       {
+        name: "Prospect Engine",
+        href: "/prospects",
+        iconName: "Target",
+        badge: "Phase 3",
+        isPhaseDisabled: false,
+        permission: "lead.view",
+      },
+      {
         name: "Leads",
         href: "/leads",
         iconName: "UserPlus",

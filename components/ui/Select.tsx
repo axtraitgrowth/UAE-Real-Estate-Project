@@ -22,7 +22,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     return (
       <div className="w-full space-y-1.5">
         {label && (
-          <label htmlFor={selectId} className="block text-xs font-medium uppercase tracking-wider text-slate-400">
+          <label htmlFor={selectId} className="block text-[11px] font-semibold uppercase tracking-wider text-slate-400">
             {label}
           </label>
         )}
@@ -33,17 +33,17 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             ref={ref}
             disabled={disabled}
             className={cn(
-              "w-full bg-[#0F1420] text-slate-100 text-sm rounded-md border border-slate-700/80 px-3 py-2 pr-8 appearance-none transition-all",
-              "focus:outline-none focus:border-amber-500/80 focus:ring-1 focus:ring-amber-500/80",
-              "disabled:opacity-50 disabled:bg-slate-900/60 disabled:cursor-not-allowed",
-              error ? "border-red-500 focus:border-red-500 focus:ring-red-500/50" : "",
+              "w-full bg-[#0B0E14] text-slate-100 text-xs sm:text-sm rounded-md border border-[#232C42] px-3 py-2 pr-8 appearance-none transition-colors",
+              "focus:outline-none focus:border-[#B39266] focus:ring-1 focus:ring-[#B39266]/40",
+              "disabled:opacity-40 disabled:bg-[#07090E] disabled:cursor-not-allowed",
+              error ? "border-rose-500/70 focus:border-rose-500 focus:ring-rose-500/30" : "",
               className
             )}
             {...props}
           >
             {options
               ? options.map((opt) => (
-                  <option key={opt.value} value={opt.value} disabled={opt.disabled} className="bg-[#0F1420] text-slate-100">
+                  <option key={opt.value} value={opt.value} disabled={opt.disabled} className="bg-[#10141E] text-slate-100">
                     {opt.label}
                   </option>
                 ))

@@ -25,16 +25,16 @@ export function Alert({
   };
 
   const variants = {
-    info: "border-sky-500/30 bg-sky-500/10 text-sky-200",
-    success: "border-emerald-500/30 bg-emerald-500/10 text-emerald-200",
-    warning: "border-amber-500/30 bg-amber-500/10 text-amber-200",
-    destructive: "border-red-500/30 bg-red-500/10 text-red-200",
+    info: "border-sky-700/40 bg-sky-950/30 text-sky-200",
+    success: "border-emerald-700/40 bg-emerald-950/30 text-emerald-200",
+    warning: "border-[#B39266]/40 bg-[#3D301D]/30 text-amber-200",
+    destructive: "border-rose-700/40 bg-rose-950/30 text-rose-200",
   };
 
   return (
     <div
       role="alert"
-      className={cn("flex gap-3 rounded-lg border p-4 text-sm", variants[variant], className)}
+      className={cn("flex gap-3 rounded-lg border p-3.5 text-xs sm:text-sm", variants[variant], className)}
     >
       {icons[variant]}
       <div className="flex-1">

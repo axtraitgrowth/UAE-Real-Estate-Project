@@ -18,7 +18,7 @@ export function LoginForm() {
     setFormError(null);
 
     if (!email) {
-      setFormError("Please enter your work email");
+      setFormError("Please enter your corporate email address");
       return;
     }
     if (!password) {
@@ -36,25 +36,25 @@ export function LoginForm() {
   };
 
   return (
-    <div className="w-full max-w-md space-y-6">
+    <div className="w-full max-w-md space-y-5">
       {/* Brand Header */}
-      <div className="text-center space-y-2">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 text-slate-950 font-black text-xl shadow-lg shadow-amber-500/20">
-          ▲
+      <div className="text-center space-y-1.5">
+        <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-lg bg-[#B39266] text-[#0B0E14] font-black text-sm tracking-wider shadow-sm">
+          APX
         </div>
-        <h1 className="text-2xl font-bold tracking-tight text-white">APEX UAE</h1>
-        <p className="text-xs uppercase tracking-widest text-amber-400 font-mono">
-          Real Estate Sales Management & Supervision
+        <h1 className="text-xl font-bold tracking-tight text-white">APEX REAL ESTATE</h1>
+        <p className="text-[11px] uppercase tracking-widest text-[#C5A880] font-mono">
+          Dubai Sales Management & Supervision Platform
         </p>
-        <p className="text-xs text-slate-400 max-w-xs mx-auto pt-1">
-          Enterprise supervision platform for Dubai developers, agencies, and sales operations
+        <p className="text-xs text-slate-400 max-w-xs mx-auto pt-0.5 leading-relaxed">
+          Enterprise supervision gateway for developers, builders, and sales management
         </p>
       </div>
 
       {/* Form Container */}
-      <div className="rounded-xl border border-slate-800 bg-[#0F1420]/90 backdrop-blur-md p-6 sm:p-8 shadow-2xl">
+      <div className="rounded-lg border border-[#1E2638] bg-[#10141E] p-6 sm:p-7 shadow-xl">
         {(formError || authError) && (
-          <div className="mb-5">
+          <div className="mb-4">
             <Alert variant="destructive" title="Authentication Error">
               {formError || authError}
             </Alert>
@@ -65,7 +65,7 @@ export function LoginForm() {
           <Input
             type="email"
             label="Corporate Email"
-            placeholder="agent@company.ae"
+            placeholder="officer@developer.ae"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             leftIcon={<Mail className="w-4 h-4" />}
@@ -89,44 +89,44 @@ export function LoginForm() {
           <Button
             type="submit"
             variant="primary"
-            className="w-full mt-2"
+            className="w-full mt-1"
             isLoading={isLoading}
           >
-            Access Supervision OS
+            Access Supervision Workspace
           </Button>
         </form>
 
-        {/* Demo Accounts Quick-Select for Phase 1 testing */}
-        <div className="mt-8 border-t border-slate-800 pt-6">
-          <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-1.5">
-            <KeyRound className="w-3.5 h-3.5 text-amber-400" />
-            <span>Phase 1 Demo Credentials</span>
+        {/* Demo Personas Selector */}
+        <div className="mt-6 border-t border-[#1E2638] pt-5">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-2.5 flex items-center gap-1.5">
+            <KeyRound className="w-3.5 h-3.5 text-[#C5A880]" />
+            <span>Phase 1 Verified Personas</span>
           </p>
           <div className="grid grid-cols-1 gap-2">
             <button
               type="button"
               onClick={() => handleFillDemo("owner@emaar.ae")}
-              className="flex items-center justify-between rounded-md border border-slate-800 bg-slate-900/60 px-3 py-2 text-left text-xs transition-colors hover:border-amber-500/50 hover:bg-slate-850"
+              className="flex items-center justify-between rounded-md border border-[#1E2638] bg-[#0B0E14] px-3.5 py-2 text-left text-xs transition-colors hover:border-[#B39266]/50 hover:bg-[#151B28]"
             >
               <div>
-                <p className="font-medium text-slate-200">Emaar Properties PJSC</p>
-                <p className="text-[10px] text-slate-400">owner@emaar.ae</p>
+                <p className="font-semibold text-slate-200">Emaar Properties PJSC</p>
+                <p className="text-[11px] text-slate-400 font-mono">owner@emaar.ae</p>
               </div>
-              <span className="rounded bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 text-[10px] font-mono text-amber-400">
-                Owner
+              <span className="rounded bg-[#B39266]/15 border border-[#B39266]/30 px-2 py-0.5 text-[10px] font-mono text-[#C5A880] uppercase">
+                Owner / Executive
               </span>
             </button>
 
             <button
               type="button"
               onClick={() => handleFillDemo("manager@emaar.ae")}
-              className="flex items-center justify-between rounded-md border border-slate-800 bg-slate-900/60 px-3 py-2 text-left text-xs transition-colors hover:border-amber-500/50 hover:bg-slate-850"
+              className="flex items-center justify-between rounded-md border border-[#1E2638] bg-[#0B0E14] px-3.5 py-2 text-left text-xs transition-colors hover:border-[#B39266]/50 hover:bg-[#151B28]"
             >
               <div>
-                <p className="font-medium text-slate-200">Emaar Sales Management</p>
-                <p className="text-[10px] text-slate-400">manager@emaar.ae</p>
+                <p className="font-semibold text-slate-200">Emaar Sales Operations</p>
+                <p className="text-[11px] text-slate-400 font-mono">manager@emaar.ae</p>
               </div>
-              <span className="rounded bg-sky-500/10 border border-sky-500/30 px-1.5 py-0.5 text-[10px] font-mono text-sky-400">
+              <span className="rounded bg-[#151B28] border border-[#232C42] px-2 py-0.5 text-[10px] font-mono text-slate-300 uppercase">
                 Sales Manager
               </span>
             </button>
@@ -134,26 +134,26 @@ export function LoginForm() {
             <button
               type="button"
               onClick={() => handleFillDemo("agent@emaar.ae")}
-              className="flex items-center justify-between rounded-md border border-slate-800 bg-slate-900/60 px-3 py-2 text-left text-xs transition-colors hover:border-amber-500/50 hover:bg-slate-850"
+              className="flex items-center justify-between rounded-md border border-[#1E2638] bg-[#0B0E14] px-3.5 py-2 text-left text-xs transition-colors hover:border-[#B39266]/50 hover:bg-[#151B28]"
             >
               <div>
-                <p className="font-medium text-slate-200">Emaar Brokerage</p>
-                <p className="text-[10px] text-slate-400">agent@emaar.ae</p>
+                <p className="font-semibold text-slate-200">Emaar Brokerage Division</p>
+                <p className="text-[11px] text-slate-400 font-mono">agent@emaar.ae</p>
               </div>
-              <span className="rounded bg-emerald-500/10 border border-emerald-500/30 px-1.5 py-0.5 text-[10px] font-mono text-emerald-400">
-                Agent
+              <span className="rounded bg-emerald-950/40 border border-emerald-700/40 px-2 py-0.5 text-[10px] font-mono text-emerald-300 uppercase">
+                Licensed Agent
               </span>
             </button>
           </div>
-          <p className="text-[10px] text-slate-500 mt-2 text-center">
-            Demo Password: <span className="font-mono text-slate-400">ApexDemo2026!</span>
+          <p className="text-[10px] text-slate-500 mt-2.5 text-center">
+            Demo Password: <span className="font-mono text-slate-300 font-semibold">ApexDemo2026!</span>
           </p>
         </div>
       </div>
 
-      <div className="flex items-center justify-center gap-2 text-xs text-slate-500">
+      <div className="flex items-center justify-center gap-2 text-[11px] text-slate-500">
         <Building2 className="w-3.5 h-3.5" />
-        <span>Dubai Real Estate Regulatory Compliant Architecture</span>
+        <span>Dubai DLD / RERA Regulatory Architecture • Multi-Tenant Enforced</span>
       </div>
     </div>
   );

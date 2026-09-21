@@ -28,6 +28,7 @@ model Organization {
   teams       Team[]
   roles       Role[]
   auditLogs   AuditLog[]
+  prospects   Prospect[]
 
   @@index([slug])
   @@index([isActive])
@@ -50,9 +51,10 @@ model User {
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 
-  memberships OrganizationMembership[]
-  ledTeams    Team[]                   @relation("TeamLeader")
-  auditLogs   AuditLog[]
+  memberships       OrganizationMembership[]
+  ledTeams          Team[]                   @relation("TeamLeader")
+  auditLogs         AuditLog[]
+  assignedProspects Prospect[]               @relation("AssignedProspects")
 
   @@index([email])
   @@index([isActive])
@@ -179,3 +181,103 @@ model AuditLog {
   @@index([entityType])
   @@index([createdAt])
 }
+
+// ----------------------------------------------------
+// Prospect Database Foundation (Phase 3: UAE Real Estate Engine)
+// ----------------------------------------------------
+model Prospect {
+  id                        String    @id @default(cuid())
+  organizationId            String
+  assignedToUserId          String?
+
+  // 1. Company Information
+  companyName               String
+  companyType               String    // DEVELOPER | BROKERAGE | AGENCY
+  website                   String?
+  location                  String?   // e.g. "Dubai, UAE"
+  linkedinCompanyUrl        String?
+  instagramUrl              String?
+  companySize               String?   // "1-10" | "11-50" | "51-200" | "200+"
+  primaryMarket             String?   // "Dubai Off-Plan" | "Luxury Residential" | "Commercial" | etc.
+  propertySegment           String?   // "Ultra-Luxury" | "High-End" | "Mid-Tier" | "Master Communities"
+  activeProjects            String?   // Text/notes of known projects
+  companyNotes              String?
+
+  // 2. Contact Information
+  contactName               String?
+  jobTitle                  String?
+  businessEmail             String?
+  businessPhone             String?   // Verified phone / WhatsApp (+971 or intl)
+  linkedinProfile           String?
+  preferredContactChannel   String?   // LINKEDIN | EMAIL | PHONE_WHATSAPP
+  contactSource             String?   // "LinkedIn Research" | "DLD Registry" | "Website" | "Referral"
+
+  // 3. Sales Research (Evidence-Grounded)
+  websiteQuality            String    @default("NOT_VERIFIED") // EXCELLENT | AVERAGE | POOR | NOT_VERIFIED
+  leadFunnelQuality         String    @default("NOT_VERIFIED") // ADVANCED | BASIC | FRAGMENTED | NOT_VERIFIED
+  hasLandingPage            Boolean   @default(false)
+  hasLeadForm               Boolean   @default(false)
+  hasWhatsappCta            Boolean   @default(false)
+  visibleAdActivity         String    @default("NOT_VERIFIED") // META_AND_GOOGLE | META_ONLY | GOOGLE_ONLY | NONE | NOT_VERIFIED
+  crmVisibility             String    @default("NOT_PUBLICLY_VISIBLE") // DETECTED | UNKNOWN | NOT_PUBLICLY_VISIBLE
+  leadManagementObservation String?
+  marketingObservation      String?
+  personalizedOpportunity   String?
+
+  // 4. Sales Status & Pipeline Telemetry
+  leadScore                 String    @default("MEDIUM") // LOW | MEDIUM | HIGH
+  leadScorePoints           Int       @default(50)       // 0 - 100
+  leadStatus                String    @default("NEW_PROSPECT") // NEW_PROSPECT | RESEARCHED | CONTACTED | REPLIED | QUALIFIED | MEETING_BOOKED | MEETING_COMPLETED | PROPOSAL_SENT | NEGOTIATION | WON | LOST | NOT_NOW | DISQUALIFIED | DO_NOT_CONTACT
+  outreachChannel           String?   // EMAIL | LINKEDIN | WHATSAPP | PHONE
+  firstContactDate          DateTime?
+  lastContactDate           DateTime?
+  nextFollowUpDate          DateTime?
+  replyStatus               String    @default("NO_REPLY") // NO_REPLY | POSITIVE | MEETING_REQUEST | INFO_REQUEST | NOT_NOW | NOT_INTERESTED | WRONG_PERSON | UNSUBSCRIBE
+  meetingStatus             String    @default("NONE")     // NONE | REQUESTED | BOOKED | COMPLETED | NO_SHOW | RESCHEDULED
+  proposalStatus            String    @default("NONE")     // NONE | DRAFTING | SENT | ACCEPTED | REJECTED
+  dealStatus                String    @default("PIPELINE") // PIPELINE | WON | LOST | DISQUALIFIED
+  dealValue                 Float?    // In AED
+  salesNotes                String?
+
+  // -------------------------------------------------------
+  // Qualification Intelligence Layer (Phase 3 Step 2)
+  // -------------------------------------------------------
+
+  // ICP Classification
+  digitalMaturity           String    @default("UNKNOWN")          // LOW | DEVELOPING | ADVANCED | UNKNOWN
+  decisionMakerLevel        String    @default("UNKNOWN")          // TIER_1 | TIER_2 | TIER_3 | LOWER | UNKNOWN
+  propertySegments          String?                                 // JSON string: ["OFF_PLAN","LUXURY",...]
+  geographicPriority        String    @default("PRIORITY_1")       // PRIORITY_1 | PRIORITY_2 | PRIORITY_3
+
+  // 100-Point Score Breakdown (server-computed on create/update)
+  icpFitScore               Int       @default(0)                  // 0-30 pts
+  marketFitScore            Int       @default(0)                  // 0-15 pts
+  leadDependencyScore       Int       @default(0)                  // 0-15 pts
+  digitalOpportunityScore   Int       @default(0)                  // 0-20 pts
+  salesOperationScore       Int       @default(0)                  // 0-10 pts
+  decisionMakerAccessScore  Int       @default(0)                  // 0-10 pts
+
+  // Qualification Meta
+  evidenceConfidence        String    @default("UNKNOWN")          // VERIFIED | PARTIALLY_VERIFIED | UNKNOWN
+  outreachReadiness         String    @default("NEEDS_RESEARCH")   // READY | NEEDS_RESEARCH | DO_NOT_CONTACT
+  positiveSignals           String?                                 // JSON string: ["ACTIVE_PROJECT","LEAD_FORM",...]
+  disqualificationReason    String?                                 // NOT_REAL_ESTATE | OUTSIDE_UAE | etc.
+  qualificationSummary      String?                                 // Internal salesperson qualification note
+
+  createdAt                 DateTime  @default(now())
+  updatedAt                 DateTime  @updatedAt
+
+  // Relations
+  organization              Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  assignedTo                User?        @relation("AssignedProspects", fields: [assignedToUserId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId])
+  @@index([organizationId, leadStatus])
+  @@index([organizationId, companyType])
+  @@index([organizationId, leadScore])
+  @@index([organizationId, outreachReadiness])
+  @@index([organizationId, digitalMaturity])
+  @@index([organizationId, decisionMakerLevel])
+  @@index([assignedToUserId])
+}
+

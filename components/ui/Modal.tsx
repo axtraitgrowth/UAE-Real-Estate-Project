@@ -42,7 +42,7 @@ export function Modal({ isOpen, onClose, title, description, children, className
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/75 backdrop-blur-sm transition-opacity"
+        className="fixed inset-0 bg-black/80 transition-opacity"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -54,11 +54,11 @@ export function Modal({ isOpen, onClose, title, description, children, className
         aria-modal="true"
         aria-labelledby="modal-title"
         className={cn(
-          "relative w-full max-w-lg rounded-xl border border-slate-800 bg-[#0F1420] text-slate-100 shadow-2xl transition-all z-10 overflow-hidden",
+          "relative w-full max-w-lg rounded-lg border border-[#1E2638] bg-[#10141E] text-slate-100 shadow-2xl transition-all z-10 overflow-hidden",
           className
         )}
       >
-        <div className="flex items-center justify-between border-b border-slate-800 px-6 py-4">
+        <div className="flex items-center justify-between border-b border-[#1E2638] px-5 py-4">
           <div>
             <h3 id="modal-title" className="text-base font-semibold text-slate-100">
               {title}
@@ -68,7 +68,7 @@ export function Modal({ isOpen, onClose, title, description, children, className
           <button
             type="button"
             onClick={onClose}
-            className="rounded-md p-1.5 text-slate-400 hover:bg-slate-800 hover:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
+            className="rounded-md p-1.5 text-slate-400 hover:bg-[#151B28] hover:text-slate-100 focus:outline-none focus:ring-1 focus:ring-[#B39266]"
             aria-label="Close modal"
           >
             <X className="w-4 h-4" />

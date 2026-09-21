@@ -18,11 +18,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   if (isLoading) {
     return (
-      <div className="flex h-screen w-full items-center justify-center bg-[#07090F] text-slate-400">
-        <div className="flex flex-col items-center gap-3">
-          <LoadingSpinner size="lg" />
-          <p className="text-xs font-mono uppercase tracking-wider text-slate-400">
-            Initializing Apex Supervision Context...
+      <div className="flex h-screen w-full items-center justify-center bg-[#0B0E14] text-slate-400">
+        <div className="flex flex-col items-center gap-2.5">
+          <LoadingSpinner size="md" />
+          <p className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
+            Loading Supervision Workspace...
           </p>
         </div>
       </div>

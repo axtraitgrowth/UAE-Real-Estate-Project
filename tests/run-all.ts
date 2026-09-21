@@ -1,10 +1,12 @@
 import { testAuth } from "./auth.test";
 import { testRbac } from "./rbac.test";
 import { testIsolation } from "./isolation.test";
+import { testProspect } from "./prospect.test";
+import { testQualification } from "./qualification.test";
 
 async function runAllTests() {
   console.log("=================================================");
-  console.log("🚀 Apex UAE Real Estate Platform - Phase 1 Test Suite");
+  console.log("🚀 Apex UAE Real Estate Platform - Test Suite");
   console.log("=================================================");
 
   const startTime = Date.now();
@@ -12,10 +14,12 @@ async function runAllTests() {
     await testAuth();
     await testRbac();
     await testIsolation();
+    await testProspect();
+    await testQualification();
 
     const duration = ((Date.now() - startTime) / 1000).toFixed(2);
     console.log("\n=================================================");
-    console.log(`✅ ALL PHASE 1 TESTS PASSED (${duration}s)`);
+    console.log(`✅ ALL TEST SUITES PASSED (${duration}s)`);
     console.log("=================================================\n");
     process.exit(0);
   } catch (error) {
